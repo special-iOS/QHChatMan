@@ -10,6 +10,8 @@
 
 #import "QHChatBaseUtil.h"
 #import "TFHpple/TFHpple.h"
+#import "QHHtmlUtil.h"
+#import "QHGifTextAttachment.h"
 
 @implementation UIColor (QHPlusPlus)
 
@@ -53,7 +55,8 @@
     NSDictionary *body = data[@"body"];
     NSString *n = body[@"nickname"];
     NSString *c = body[@"content"];
-    NSString *contentString = [NSString stringWithFormat:@"<font color='#999999'>%@：</font><font color='#151515'>%@</font>", n, c];
+    CGFloat w = 20;
+    NSString *contentString = [NSString stringWithFormat:@"<font color='#999999'>%@：</font><font color='#151515'>%@ </font><font t='gif' src='http://www.png' w='%f'/><font color='#151515'> 哈喽</font>", n, c, w];
     NSMutableAttributedString *chatData = [NSMutableAttributedString new];
     [self anaylzeHtml:&chatData content:contentString];
     
@@ -64,7 +67,8 @@
     NSDictionary *body = data[@"body"];
     NSString *n = body[@"nickname"];
     NSString *c = body[@"giftName"];
-    NSString *contentString = [NSString stringWithFormat:@"<font color='#999999'>%@ 送 </font><font color='#F5A623'>%@</font>", n, c];
+    CGFloat w = 20;
+    NSString *contentString = [NSString stringWithFormat:@"<font color='#999999'>%@ 送 </font><font color='#F5A623'>%@</font><font t='img' src='http://www.png' w='%f'/>", n, c, w];
     NSMutableAttributedString *chatData = [NSMutableAttributedString new];
     [self anaylzeHtml:&chatData content:contentString];
     
@@ -87,16 +91,44 @@
     return chatData;
 }
 
+
+#pragma mark - Util
+
 + (void)anaylzeHtml:(NSMutableAttributedString **)chatData content:(NSString *)contentString {
     NSData *data = [contentString dataUsingEncoding:NSUTF8StringEncoding];
     TFHpple *doc = [[TFHpple alloc] initWithHTMLData:data];
     NSArray *elements = [doc searchWithXPathQuery:@"//font"];
     for (TFHppleElement *element in elements) {
-        NSString *color = element.attributes[@"color"];
-        if (color == nil) {
-            color = @"#FFFFFF";
+        NSString *type = element.attributes[@"t"];
+        if (type != nil && [type isEqualToString:@"img"]) {
+            NSString *url = element.attributes[@"src"];
+            if (url != nil) {
+                UIImage *i = [QHHtmlUtil download:url];
+                if (i != nil) {
+                    CGFloat w = [element.attributes[@"w"] floatValue];
+                    [*chatData appendAttributedString:[QHChatBaseUtil toImage:i size:CGSizeMake(w, w) offBottom:-4]];
+                }
+            }
         }
-        [*chatData appendAttributedString:[QHChatBaseUtil toContent:element.text color:[UIColor qh_colorWithHexString:color]]];
+        else if (type != nil && [type isEqualToString:@"gif"]) {
+            CGFloat w = [element.attributes[@"w"] floatValue];
+            QHGifTextAttachment *attachment = [QHGifTextAttachment new];
+            attachment.gifName = @"[vip_来一首]";
+            attachment.gifWidth = w;
+            attachment.bounds = CGRectMake(0, 0, w, w);
+            NSAttributedString *a = [NSAttributedString attributedStringWithAttachment:attachment];
+            [*chatData appendAttributedString:a];
+        }
+        else {
+            NSString *color = element.attributes[@"color"];
+            if (color == nil) {
+                color = @"#FFFFFF";
+            }
+            NSAttributedString *a = [QHChatBaseUtil toContent:element.text color:[UIColor qh_colorWithHexString:color]];
+            if (a != nil) {
+                [*chatData appendAttributedString:a];
+            }
+        }
     }
 }
 

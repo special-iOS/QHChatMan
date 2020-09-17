@@ -9,6 +9,8 @@
 #import "QHChatLiveCloudTFHppleView.h"
 
 #import "QHChatLiveCloudTFHppleUtil.h"
+#import "QHChatLiveCloudHtmlContentViewCell.h"
+#import "QHChatLiveCloudDateViewCell.h"
 
 NSString *const kChatOpKey2 = @"op";
 NSString *const kChatOpValueChat2 = @"chat";
@@ -16,6 +18,31 @@ NSString *const kChatOpValueGift2 = @"gift";
 NSString *const kChatOpValueEnter2 = @"enter";
 
 @implementation QHChatLiveCloudTFHppleView
+
+- (void)qhChatAddCell2TableView:(UITableView *)tableView {
+    [tableView registerClass:[QHChatLiveCloudHtmlContentViewCell class] forCellReuseIdentifier:@"QHChatLiveCloudHtmlContentViewCell"];
+    [tableView registerClass:[QHChatLiveCloudDateViewCell class] forCellReuseIdentifier:@"QHChatLiveCloudDateViewCell"];
+}
+
+- (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *chatCell = nil;
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+    NSDictionary *data = model.originChatDataDic;
+    NSString *op = data[kChatOpKey];
+    if ([op isEqualToString:kChatOpValueDate] == YES) {
+        QHChatLiveCloudDateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QHChatLiveCloudDateViewCell"];
+        cell.contentL.text = data[kQHCHAT_LC_SHOWDATE_KEY];
+        chatCell = cell;
+    }
+    else {
+        if (model.chatAttributedText != nil) {
+            QHChatLiveCloudHtmlContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QHChatLiveCloudHtmlContentViewCell"];
+            cell.contentT.attributedText = model.chatAttributedText;
+            chatCell = cell;
+        }
+    }
+    return chatCell;
+}
 
 - (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
     NSString *op = data[kChatOpKey2];

@@ -66,6 +66,12 @@
 		7491F14823A1196600DD9C1E /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F14723A1196600DD9C1E /* ggg.png */; };
 		74BDA9162510A3D000E95BF6 /* YYWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9122510A3CF00E95BF6 /* YYWeakProxy.m */; };
 		74BDA9172510A3D000E95BF6 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9152510A3D000E95BF6 /* YYFPSLabel.m */; };
+		74BDA9502513572A00E95BF6 /* QHHtmlUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA94F2513572A00E95BF6 /* QHHtmlUtil.m */; };
+		74BDA9522513585100E95BF6 /* vip_来一首.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BDA9512513585100E95BF6 /* vip_来一首.png */; };
+		74BDA9542513586800E95BF6 /* [vip_来一首].gif in Resources */ = {isa = PBXBuildFile; fileRef = 74BDA9532513586800E95BF6 /* [vip_来一首].gif */; };
+		74BDA9572513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9562513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.m */; };
+		74BDA95C2513629F00E95BF6 /* QHGifTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA95B2513629F00E95BF6 /* QHGifTextView.m */; };
+		74BDA95F251362C100E95BF6 /* QHGifTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA95E251362C100E95BF6 /* QHGifTextAttachment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,6 +181,16 @@
 		74BDA9132510A3CF00E95BF6 /* YYWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWeakProxy.h; sourceTree = "<group>"; };
 		74BDA9142510A3D000E95BF6 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
 		74BDA9152510A3D000E95BF6 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
+		74BDA94E2513572A00E95BF6 /* QHHtmlUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHHtmlUtil.h; sourceTree = "<group>"; };
+		74BDA94F2513572A00E95BF6 /* QHHtmlUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHHtmlUtil.m; sourceTree = "<group>"; };
+		74BDA9512513585100E95BF6 /* vip_来一首.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_来一首.png"; sourceTree = "<group>"; };
+		74BDA9532513586800E95BF6 /* [vip_来一首].gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "[vip_来一首].gif"; sourceTree = "<group>"; };
+		74BDA9552513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveCloudHtmlContentViewCell.h; sourceTree = "<group>"; };
+		74BDA9562513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveCloudHtmlContentViewCell.m; sourceTree = "<group>"; };
+		74BDA95A2513629F00E95BF6 /* QHGifTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGifTextView.h; sourceTree = "<group>"; };
+		74BDA95B2513629F00E95BF6 /* QHGifTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGifTextView.m; sourceTree = "<group>"; };
+		74BDA95D251362C000E95BF6 /* QHGifTextAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGifTextAttachment.h; sourceTree = "<group>"; };
+		74BDA95E251362C100E95BF6 /* QHGifTextAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGifTextAttachment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +403,8 @@
 		742BD44523CC528B005BD7BA /* QHTFHppleViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74BDA9592513627300E95BF6 /* SubView */,
+				74BDA94D2513567B00E95BF6 /* OtherUtil */,
 				742BD45023CC5699005BD7BA /* TFHpple */,
 				742BD44723CC537F005BD7BA /* QHTFHppleViewController.h */,
 				742BD44823CC537F005BD7BA /* QHTFHppleViewController.m */,
@@ -532,6 +550,30 @@
 			path = YYFPSLabel;
 			sourceTree = "<group>";
 		};
+		74BDA94D2513567B00E95BF6 /* OtherUtil */ = {
+			isa = PBXGroup;
+			children = (
+				74BDA9532513586800E95BF6 /* [vip_来一首].gif */,
+				74BDA9512513585100E95BF6 /* vip_来一首.png */,
+				74BDA94E2513572A00E95BF6 /* QHHtmlUtil.h */,
+				74BDA94F2513572A00E95BF6 /* QHHtmlUtil.m */,
+			);
+			path = OtherUtil;
+			sourceTree = "<group>";
+		};
+		74BDA9592513627300E95BF6 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				74BDA9552513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.h */,
+				74BDA9562513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.m */,
+				74BDA95A2513629F00E95BF6 /* QHGifTextView.h */,
+				74BDA95B2513629F00E95BF6 /* QHGifTextView.m */,
+				74BDA95D251362C000E95BF6 /* QHGifTextAttachment.h */,
+				74BDA95E251362C100E95BF6 /* QHGifTextAttachment.m */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -596,10 +638,12 @@
 				743D417121D382A7000FAF61 /* dy_level.png in Resources */,
 				7405204821CBA3F7003872FA /* LaunchScreen.storyboard in Resources */,
 				746FE5D322BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib in Resources */,
+				74BDA9522513585100E95BF6 /* vip_来一首.png in Resources */,
 				7491F14823A1196600DD9C1E /* ggg.png in Resources */,
 				745E0FA623754F040064269E /* QHTKRoomChatViewController.xib in Resources */,
 				7491F14623A1170D00DD9C1E /* ggg@3x.png in Resources */,
 				743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */,
+				74BDA9542513586800E95BF6 /* [vip_来一首].gif in Resources */,
 				7405204321CBA3F6003872FA /* Main.storyboard in Resources */,
 				7434CBA321D4AF3B008E03B2 /* QHChatDouyuTipTableViewCell.xib in Resources */,
 				741250B6247EBDB100DE86EA /* Assets.xcassets in Resources */,
@@ -622,6 +666,7 @@
 				7434CBB721D62953008E03B2 /* QHChatLiveCloudNewDataView.m in Sources */,
 				742BD44C23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m in Sources */,
 				7434CBB421D60DE3008E03B2 /* QHChatLiveCloudContentViewCell.m in Sources */,
+				74BDA9572513593300E95BF6 /* QHChatLiveCloudHtmlContentViewCell.m in Sources */,
 				7405203721CBA3F6003872FA /* QHDetailRootViewController.m in Sources */,
 				74343D0D21D0D017004243A0 /* NSTimer+QHEOCBlocksSupport.m in Sources */,
 				7405205F21CCB9A6003872FA /* QHViewUtil.m in Sources */,
@@ -642,10 +687,12 @@
 				74343D1421D1DEB4004243A0 /* QHChatBaseNewDataView.m in Sources */,
 				745E0F99237544700064269E /* QHTKChatRoomView.m in Sources */,
 				742BD45823CC569A005BD7BA /* TFHppleElement.m in Sources */,
+				74BDA95F251362C100E95BF6 /* QHGifTextAttachment.m in Sources */,
 				742BD44923CC537F005BD7BA /* QHTFHppleViewController.m in Sources */,
 				742BD45723CC569A005BD7BA /* TFHpple.m in Sources */,
 				7491F086239D4D2200DD9C1E /* QHBgRoomViewController.m in Sources */,
 				7434CBA221D4AF3B008E03B2 /* QHChatDouyuTipTableViewCell.m in Sources */,
+				74BDA95C2513629F00E95BF6 /* QHGifTextView.m in Sources */,
 				7405205621CBABCA003872FA /* QHChatBaseView.m in Sources */,
 				745E0F9E2375450E0064269E /* QHTKRoomChatContentViewCell.m in Sources */,
 				7434CBBA21D642F2008E03B2 /* QHChatLiveCloudDateViewCell.m in Sources */,
@@ -658,6 +705,7 @@
 				74343D0A21CFE228004243A0 /* QHChatBaseConfig.m in Sources */,
 				7405204021CBA3F6003872FA /* ViewController.m in Sources */,
 				741250B9247EC15600DE86EA /* QHChatBaseBuffer.m in Sources */,
+				74BDA9502513572A00E95BF6 /* QHHtmlUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,6 @@
 #define kQHCHAT_LC_DATE_CELLIDENTIFIER @"QHChatLCDateCellIdentifier"
 
 #define kQHCHAT_LC_SHOWDATE_TIME 160
-#define kQHCHAT_LC_SHOWDATE_KEY @"lcstk"
 
 NSString *const kChatOpKey = @"op";
 NSString *const kChatOpValueChat = @"chat";

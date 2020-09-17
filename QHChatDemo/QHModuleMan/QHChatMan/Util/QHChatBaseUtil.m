@@ -42,11 +42,19 @@
 }
 
 + (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size {
-    return [QHChatBaseUtil toImage:image size:size addContentBlock:nil];
+    return [QHChatBaseUtil toImage:image size:size offBottom:-2 addContentBlock:nil];
+}
+
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom {
+    return [QHChatBaseUtil toImage:image size:size offBottom:offBottom addContentBlock:nil];
 }
 
 // [Null passed to a callee that requires a non-nul... - 简书](https://www.jianshu.com/p/3d030d367a34)
 + (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size addContentBlock:(nullable AddContentBlock)block {
+    return [QHChatBaseUtil toImage:image size:size offBottom:-2 addContentBlock:block];
+}
+
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom addContentBlock:(nullable AddContentBlock)block {
     UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
     imageV.frame = (CGRect){CGPointZero, size};
     if (block != nil) {

@@ -28,7 +28,7 @@
 
 #import "QHChatLiveCloudTFHppleView.h"
 
-@interface QHTFHppleViewController ()
+@interface QHTFHppleViewController ()<QHChatBaseViewDelegate>
 
 @end
 
@@ -51,6 +51,7 @@
     v.config.cellConfig = cellConfig;
     v.config.chatCountMax = 50;
     v.config.chatCountDelete = 5;
+    v.config.bAutoCellHeight = YES;
     
     self.chatView = v;
     
@@ -76,17 +77,19 @@
     
     NSArray *ds = @[enterMeg1, sayMeg1, sayMeg2, giftMeg1, giftMeg2];
     
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        while (YES) {
-            if (weakSelf == nil) {
-                break;
-            }
-            [weakSelf.chatView lcInsertChatData:ds];
-            CGFloat t = [QHTFHppleViewController getRandomNumber:2 to:10] * 0.01;
-            [NSThread sleepForTimeInterval:t];
-        }
-    });
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        while (YES) {
+//            if (weakSelf == nil) {
+//                break;
+//            }
+//            [weakSelf.chatView lcInsertChatData:ds];
+//            CGFloat t = [QHTFHppleViewController getRandomNumber:2 to:10] * 0.01;
+//            [NSThread sleepForTimeInterval:t];
+//        }
+//    });
+
+    [self.chatView lcInsertChatData:ds];
 }
 
 #pragma mark - Util

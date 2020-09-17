@@ -8,6 +8,14 @@
 
 #import "QHChatBaseView.h"
 
+#define kQHCHAT_LC_SHOWDATE_KEY @"lcstk"
+
+extern NSString *const kChatOpKey;
+extern NSString *const kChatOpValueChat;
+extern NSString *const kChatOpValueGift;
+extern NSString *const kChatOpValueDate;
+extern NSString *const kChatOpValueEnter;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHChatLiveCloudView : QHChatBaseView
