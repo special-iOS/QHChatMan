@@ -49,12 +49,19 @@
     self.backgroundColor = [UIColor clearColor];
     [self p_addContentView];
     [self p_addContentLabel];
+    [self addTapGesture];
 }
 
 - (void)p_addContentLabel {
     _contentT = [QHGifTextView new];
     [self.contentV addSubview:_contentT];
     [QHViewUtil fullScreen:_contentT edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+}
+
+#pragma mark - Action
+
+- (void)tapGestureAction:(id)sender {
+    
 }
 
 @end

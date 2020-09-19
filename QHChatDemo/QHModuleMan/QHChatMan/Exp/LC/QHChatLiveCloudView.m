@@ -122,7 +122,7 @@ NSString *const kChatOpValueEnter = @"enter";
     else {
         if (model.chatAttributedText != nil) {
             QHChatLiveCloudContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
-            cell.contentL.attributedText = model.chatAttributedText;
+            cell.contentLL.attributedText = model.chatAttributedText;
             chatCell = cell;
         }
     }

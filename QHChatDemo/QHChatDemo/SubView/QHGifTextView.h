@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHGifTextView : UITextView
 
-- (void)setGifAttributedText:(NSAttributedString *)attributedText;
+- (void)start;
 
 @end
 

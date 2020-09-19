@@ -8,6 +8,10 @@
 
 #import "QHHtmlUtil.h"
 
+@implementation QHGifImageView
+
+@end
+
 @implementation QHHtmlUtil
 
 + (UIImage *)download:(NSString *)url {
@@ -16,34 +20,52 @@
     return i;
 }
 
-+ (UIImageView *)gif:(NSString *)url {
++ (QHGifImageView *)gif:(NSString *)url {
     NSURL *gifImageUrl = [[NSBundle mainBundle] URLForResource:@"[vip_来一首]" withExtension:@"gif"];
-
+    NSData *data = [NSData dataWithContentsOfURL:gifImageUrl];
+    NSTimeInterval duration = [self durationForGifData:data];
     //获取Gif图的原数据
-    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)gifImageUrl, NULL);
-
-    //获取Gif图有多少帧
+//    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)gifImageUrl, NULL);
+    CGImageSourceRef gifSource = CGImageSourceCreateWithData((CFDataRef)data, NULL);
     size_t gifcount = CGImageSourceGetCount(gifSource);
 
     NSMutableArray *images = [[NSMutableArray alloc] init];
 
     for (NSInteger i = 0; i < gifcount; i++) {
-            
-        //由数据源gifSource生成一张CGImageRef类型的图片
-        
         CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL);
-        
         UIImage *image = [UIImage imageWithCGImage:imageRef];
         [images addObject:image];
         CGImageRelease(imageRef);
     }
     
-    UIImageView *iv = [UIImageView new];
+    QHGifImageView *iv = [QHGifImageView new];
     iv.animationImages = images;
-    iv.animationDuration = 0.2;
-    [iv startAnimating];
+    iv.animationDuration = duration;
     
     return iv;
+}
+
++ (NSTimeInterval)durationForGifData:(NSData *)data {
+    char graphicControlExtensionStartBytes[] = {0x21,0xF9,0x04};
+    double duration = 0;
+    NSRange dataSearchLeftRange = NSMakeRange(0, data.length);
+    while (YES) {
+        NSRange frameDescriptorRange = [data rangeOfData:[NSData dataWithBytes:graphicControlExtensionStartBytes length:3]
+                                                 options:NSDataSearchBackwards
+                                                   range:dataSearchLeftRange];
+        if (frameDescriptorRange.location != NSNotFound) {
+            NSData *durationData = [data subdataWithRange:NSMakeRange(frameDescriptorRange.location + 4, 2)];
+            unsigned char buffer[2];
+            [durationData getBytes:buffer length:2];
+            double delay = (buffer[0] | buffer[1] << 8);
+            duration += delay;
+            dataSearchLeftRange = NSMakeRange(0, frameDescriptorRange.location);
+        }
+        else {
+            break;
+        }
+    }
+    return duration/100;
 }
 
 @end

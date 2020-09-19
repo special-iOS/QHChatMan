@@ -42,16 +42,18 @@
 }
 
 - (void)p_initChatView {
-    QHChatLiveCloudTFHppleView *v = [QHChatLiveCloudTFHppleView createChatViewToSuperView:self.chatContainerView];
-    v.delegate = self;
-    QHChatCellConfig cellConfig = v.config.cellConfig;
+    QHChatBaseConfig *config = [QHChatBaseConfig new];
+    config.bLongPress = YES;
+    QHChatCellConfig cellConfig = config.cellConfig;
     cellConfig.cellLineSpacing = 1;
     cellConfig.fontSize = 15;
     cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width;
-    v.config.cellConfig = cellConfig;
-    v.config.chatCountMax = 50;
-    v.config.chatCountDelete = 5;
-    v.config.bAutoCellHeight = YES;
+    config.cellConfig = cellConfig;
+    config.chatCountMax = 20;
+    config.chatCountDelete = 5;
+    config.bAutoCellHeight = YES;
+    QHChatLiveCloudTFHppleView *v = [QHChatLiveCloudTFHppleView createChatViewToSuperView:self.chatContainerView withConfig:config];
+    v.delegate = self;
     
     self.chatView = v;
     
@@ -67,7 +69,7 @@
     
     NSDictionary *body = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。"};
     NSDictionary *sayMeg1 = @{@"op": @"chat", @"body": body};
-    NSDictionary *body2 = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。"};
+    NSDictionary *body2 = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。好期待待1"};
     NSDictionary *sayMeg2 = @{@"op": @"chat", @"body": body2};
     
     NSDictionary *body3 = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"giftName": @"酷炫猪", @"giftCount": @(1)};

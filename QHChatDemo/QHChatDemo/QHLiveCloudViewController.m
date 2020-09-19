@@ -47,13 +47,16 @@
 
 #pragma mark - Action
 
+
 - (IBAction)sendAction:(id)sender {
+    static int i = 0;
+    i++;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSDictionary *body = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。"};
+        NSDictionary *body = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": [NSString stringWithFormat:@"会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。"]};
         NSDictionary *sayMeg1 = @{@"op": @"chat", @"body": body};
         [weakSelf.chatView lcInsertChatData:@[sayMeg1]];
-        NSDictionary *body2 = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。"};
+        NSDictionary *body2 = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": [NSString stringWithFormat:@"%i-会议几点开始啊，好期待。", i]};
         NSDictionary *sayMeg2 = @{@"op": @"chat", @"body": body2};
         [weakSelf.chatView lcInsertChatData:@[sayMeg2]];
     });

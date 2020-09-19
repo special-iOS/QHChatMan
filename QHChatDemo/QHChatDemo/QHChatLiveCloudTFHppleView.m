@@ -17,6 +17,10 @@ NSString *const kChatOpValueChat2 = @"chat";
 NSString *const kChatOpValueGift2 = @"gift";
 NSString *const kChatOpValueEnter2 = @"enter";
 
+@interface QHChatLiveCloudTFHppleView () <QHChatBaseViewCellDelegate>
+
+@end
+
 @implementation QHChatLiveCloudTFHppleView
 
 - (void)qhChatAddCell2TableView:(UITableView *)tableView {
@@ -30,7 +34,7 @@ NSString *const kChatOpValueEnter2 = @"enter";
     NSDictionary *data = model.originChatDataDic;
     NSString *op = data[kChatOpKey];
     if ([op isEqualToString:kChatOpValueDate] == YES) {
-        QHChatLiveCloudDateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QHChatLiveCloudDateViewCell"];
+        QHChatLiveCloudDateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QHChatLiveCloudDateViewCell" forIndexPath:indexPath];
         cell.contentL.text = data[kQHCHAT_LC_SHOWDATE_KEY];
         chatCell = cell;
     }
@@ -38,6 +42,8 @@ NSString *const kChatOpValueEnter2 = @"enter";
         if (model.chatAttributedText != nil) {
             QHChatLiveCloudHtmlContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QHChatLiveCloudHtmlContentViewCell"];
             cell.contentT.attributedText = model.chatAttributedText;
+            [cell.contentT start];
+            cell.delegate = self;
             chatCell = cell;
         }
     }

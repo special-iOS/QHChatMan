@@ -11,10 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface QHGifImageView : UIImageView
+
+@end
+
 @interface QHHtmlUtil : NSObject
 
 + (UIImage *)download:(NSString *)url;
-+ (UIImageView *)gif:(NSString *)url;
++ (QHGifImageView *)gif:(NSString *)url;
 
 @end
 

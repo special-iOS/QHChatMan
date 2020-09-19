@@ -11,9 +11,10 @@
 #import "QHHtmlUtil.h"
 #import "QHGifTextAttachment.h"
 
+
 @interface QHGifTextView ()
 
-@property (nonatomic, strong) NSAttributedString *attrGif;
+@property (nonatomic, copy) NSAttributedString *attrGif;
 
 @end
 
@@ -27,65 +28,62 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [self p_setGifAttributedText];
+    [self p_start];
+}
+
+#pragma mark - Public
+
+- (void)start {
+    [self p_start];
+}
+
+#pragma mark - Private
+
 - (void)p_setup {
     self.textContainerInset = UIEdgeInsetsMake(0, -5, 0, -5);
     self.editable = NO;
-//    self.selectable = YES;
+    self.selectable = NO;
     self.scrollEnabled = NO;
 }
 
-- (void)setGifAttributedText:(NSAttributedString *)attributedText {
+- (void)p_setGifAttributedText {
+    if (self.attributedText.string.length == 0 && self.attrGif == nil) {
+        return;
+    }
     
-//    if (self.attrGif != nil && self.attrGif == attributedText) {
-//        return;
-//    }
+    if (self.attrGif != nil && [self.attrGif.string isEqualToString:self.attributedText.string]) {
+        return;
+    }
     
-//    self.clipsToBounds = NO;
-//    self.backgroundColor = [UIColor clearColor];
-    
-    __block BOOL bFind = NO;
-    __block NSMutableArray *insert = [NSMutableArray new];
-//    [self.layoutManager ensureLayoutForTextContainer:self.textContainer];
-    [self.attributedText enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.attributedText.length) options:NSAttributedStringEnumerationReverse usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-        if ([value isKindOfClass:[QHGifTextAttachment class]]) {
-            bFind = YES;
-            QHGifTextAttachment *gifTextAttachment = value;
-            self.selectedRange = range;
-            CGRect rect = [self firstRectForRange:self.selectedTextRange];
-//            CGRect rect = [self frameOfTextRange:range];
-            NSLog(@"chen>>%@,%@,%@", attributedText.string, NSStringFromCGRect(rect), NSStringFromRange(self.selectedRange));
-            if (rect.size.width > 0) {
-                if (rect.origin.x + gifTextAttachment.gifWidth > self.frame.size.width) {
-                    rect = (CGRect){0, rect.origin.y + gifTextAttachment.gifWidth, 0, 0};
-                }
-                UIImageView *iv = [QHHtmlUtil gif:@""];
-                iv.frame = (CGRect){rect.origin.x, rect.origin.y, gifTextAttachment.gifWidth, gifTextAttachment.gifWidth};
-                iv.backgroundColor = [UIColor greenColor];
-                [self addSubview:iv];
-    
-                [insert addObject:iv];
-            }
-        }
-    }];
-    self.selectedRange = NSMakeRange(0, 0);
-    
-    if (bFind == NO) {
-        for (UIView *subView in self.subviews) {
-            if ([subView isKindOfClass:[UIImageView class]]) {
-                [subView removeFromSuperview];
-            }
+    for (UIView *subView in self.subviews) {
+        if ([subView isKindOfClass:[QHGifImageView class]]) {
+            [subView removeFromSuperview];
         }
     }
 
-    if (insert.count > 0) {
-        self.attrGif = attributedText;
-        for (UIView *subView in self.subviews) {
-            if ([subView isKindOfClass:[UIImageView class]]) {
-                [subView removeFromSuperview];
-            }
-        }
-        for (UIImageView *iv in insert) {
+    self.attrGif = [self.attributedText copy];
+    
+    [self.attributedText enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.attributedText.length) options:NSAttributedStringEnumerationReverse usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+        if ([value isKindOfClass:[QHGifTextAttachment class]]) {
+            QHGifTextAttachment *gifTextAttachment = value;
+            self.selectedRange = range;
+            CGRect rect = [self firstRectForRange:self.selectedTextRange];
+            
+            QHGifImageView *iv = [QHHtmlUtil gif:@""];
+            iv.frame = (CGRect){rect.origin.x, rect.origin.y + 5, gifTextAttachment.gifWidth, gifTextAttachment.gifWidth};
+            iv.backgroundColor = [UIColor clearColor];
             [self addSubview:iv];
+        }
+    }];
+    self.selectedRange = NSMakeRange(0, 0);
+}
+
+- (void)p_start {
+    for (UIView *v in self.subviews) {
+        if ([v isKindOfClass:[QHGifImageView class]]) {
+            [(QHGifImageView *)v startAnimating];
         }
     }
 }

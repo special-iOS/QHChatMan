@@ -12,7 +12,7 @@
 
 @interface QHChatLiveCloudContentViewCell ()
 
-@property (nonatomic, strong, readwrite) UILabel *contentL;
+@property (nonatomic, strong, readwrite) UILabel *contentLL;
 
 @end
 
@@ -71,14 +71,14 @@
 }
 
 - (void)p_addContentLabel {
-    _contentL = [[UILabel alloc] initWithFrame:CGRectZero];
-    _contentL.font = [UIFont systemFontOfSize:15];
-    _contentL.numberOfLines = 0;
+    _contentLL = [[UILabel alloc] initWithFrame:CGRectZero];
+    _contentLL.font = [UIFont systemFontOfSize:15];
+    _contentLL.numberOfLines = 0;
     // [苹果开发中文网站-UILabel 设置NSLineBreakByCharWrapping无效？ | iOS开发 - CocoaChina CocoaChina_让移动开发更简单](http://www.cocoachina.com/bbs/read.php?tid=257338)
-    _contentL.lineBreakMode = NSLineBreakByCharWrapping;
-    _contentL.backgroundColor = [UIColor clearColor];
-    [_contentV addSubview:_contentL];
-    [QHViewUtil fullScreen:_contentL edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+    _contentLL.lineBreakMode = NSLineBreakByCharWrapping;
+    _contentLL.backgroundColor = [UIColor clearColor];
+    [_contentV addSubview:_contentLL];
+    [QHViewUtil fullScreen:_contentLL edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
 }
 
 @end

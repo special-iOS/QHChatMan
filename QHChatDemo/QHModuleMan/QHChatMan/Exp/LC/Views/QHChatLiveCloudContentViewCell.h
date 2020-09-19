@@ -6,17 +6,17 @@
 //  Copyright © 2018 Chen Network Technology. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QHChatBaseViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 #define QHCHAT_LC_CONTENT_EDGEINSETS UIEdgeInsetsMake(15, 15, 0, 15)
 #define QHCHAT_LC_CONTENT_TEXT_EDGEINSETS UIEdgeInsetsMake(5, 10, 5, 10)
 
-@interface QHChatLiveCloudContentViewCell : UITableViewCell
+@interface QHChatLiveCloudContentViewCell : QHChatBaseViewCell
 
 @property (nonatomic, strong) UIView *contentV;
-@property (nonatomic, strong, readonly) UILabel *contentL;
+@property (nonatomic, strong, readonly) UILabel *contentLL;
 
 - (void)p_addContentView;
 
