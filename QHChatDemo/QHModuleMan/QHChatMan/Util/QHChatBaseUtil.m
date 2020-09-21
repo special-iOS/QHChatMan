@@ -41,30 +41,33 @@
     return contentAttr;
 }
 
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size {
-    return [QHChatBaseUtil toImage:image size:size offBottom:-2 addContentBlock:nil];
-}
-
 + (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom {
-    return [QHChatBaseUtil toImage:image size:size offBottom:offBottom addContentBlock:nil];
+    return [self p_toImage:image size:size offBottom:offBottom];
 }
 
 // [Null passed to a callee that requires a non-nul... - 简书](https://www.jianshu.com/p/3d030d367a34)
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size addContentBlock:(nullable AddContentBlock)block {
-    return [QHChatBaseUtil toImage:image size:size offBottom:-2 addContentBlock:block];
-}
-
 + (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom addContentBlock:(nullable AddContentBlock)block {
     UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
     imageV.frame = (CGRect){CGPointZero, size};
     if (block != nil) {
         block(imageV);
     }
+    UIImage *i = [self convertViewToImage:imageV];
+    return [self p_toImage:i size:size offBottom:offBottom];
+}
+
++ (NSAttributedString *)p_toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom {
+    CGSize sizeF = image.size;
+    if (size.width > 0) {
+        CGFloat h = size.height;
+        CGFloat w = image.size.width * h / image.size.height;
+        sizeF = CGSizeMake(w, h);
+    }
     NSAttributedString *imageAttr = nil;
     @try {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
-        textAttachment.image = [self convertViewToImage:imageV];;
-        textAttachment.bounds = CGRectMake(0, -2, textAttachment.image.size.width, textAttachment.image.size.height);
+        textAttachment.image = image;
+        textAttachment.bounds = CGRectMake(0, offBottom, sizeF.width, sizeF.height);
         imageAttr = [NSAttributedString attributedStringWithAttachment:textAttachment];
     } @catch (NSException *exception) {
         imageAttr = [[NSAttributedString alloc] initWithString:@""];
